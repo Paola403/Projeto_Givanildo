@@ -15,20 +15,22 @@ O projeto foi desenvolvido aplicando os conceitos de **engenharia de software** 
 
 ## 🧩 Estrutura da Pasta
 
+```bash
 📁 Projeto_Givanildo/
 │
-├── 📁 data/               # Modelo conceitual/lógico/físico e dicionário de dados
-├── 📁 config/             # Conexão com o banco de dados (db.php via PDO)
-├── 📁 controller/         # Controladores (CategoriaController.php, UserController.php e TarefaController.php)
-├── 📁 model/              # Models com regras de negócio e acesso ao banco
-├── 📁 public/
-│   |
+├── 📁 data/               # Modelos conceitual, lógico e físico + dicionário de dados
+├── 📁 config/             # Arquivos de configuração e conexão com o banco (db.php via PDO)
+├── 📁 controller/         # Controladores (CategoriaController.php, UserController.php, TarefaController.php)
+├── 📁 model/              # Regras de negócio e acesso ao banco de dados
+├── 📁 public/             # Arquivos públicos (CSS, JS, imagens, etc.)
 │   └── 📁 partials/       # Componentes reutilizáveis (header, navbar, footer)
-├── 📁 views/
-│   ├── 📁 tarefa/          # Telas de tarefas
-│   ├── 📁 categoria/       # Telas de categorias e alteração de categoria
-│   └── 📁 user/            # Telas de login e cadastro
-└── README.md               # Documentação do projeto
+├── 📁 views/              # Páginas e formulários do sistema
+│   ├── 📁 tarefa/         # Telas de gerenciamento de tarefas
+│   ├── 📁 categoria/      # Telas de categorias e edição
+│   └── 📁 user/           # Telas de login e cadastro
+└── README.md              # Documentação principal do projeto
+```
+
 
 ---
 
