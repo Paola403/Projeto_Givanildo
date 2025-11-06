@@ -84,8 +84,8 @@ A prototipagem da interface foi realizada no **Figma**, servindo como base para 
 
 ## 👩‍💻 Equipe de Desenvolvimento
 
-- **Cauã Porciuncula** — Desenvolvimento front-end e back-end, integração com banco de dados, e documentação técnica. 
-- **Paola Gabriele**   — Desenvolvimento front-end, prototipação, criação do banco de dados no MySQL e documentação técnica.  
+- [Cauã Porciuncula](https://github.com/Khaleb457) — Desenvolvimento front-end e back-end, integração com banco de dados, e documentação técnica. 
+- [Paola Gabriele](https://github.com/Paola403)   — Desenvolvimento front-end, prototipação, criação do banco de dados no MySQL e documentação técnica.  
 
 
 ---
