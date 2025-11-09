@@ -496,3 +496,156 @@ body {
     font-size: 1.1em;
 }
 
+/* style.css (Adicionar no final do arquivo) */
+
+/* ======================================================= */
+/* 9. LOGIN (Estilos Exclusivos da Página de Login)        */
+/* ======================================================= */
+
+/* Importação da fonte (mantida aqui para clareza) */
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+
+/* --- Estilos Globais de Login (Aplicado APENAS ao body.login-page) --- */
+
+/* Estas regras SOBREESCREVEM temporariamente o estilo do body global */
+body.login-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #FFF9C4; /* Amarelo Claro */
+    background-size: cover;
+    background-position: center;
+    /* Redefine a fonte para login */
+    font-family: "Open Sans", sans-serif; 
+}
+
+/* Remove margens e paddings globais novamente, apenas para garantir */
+body.login-page * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Open Sans", sans-serif;
+}
+
+/* Regra 'title' (seletor HTML incorreto, assumindo que era para algum cabeçalho ou título de página) */
+title {
+    font-family: 'Roboto Slab', serif; /* Use fallback serif */
+}
+
+
+/* --- Container Principal do Formulário --- */
+
+.container {
+    width: 420px; 
+    background-color: white;
+    border: 2px solid rgb(154, 152, 152); /* Adicionei solid para corrigir a propriedade 'border' */
+    border-radius: 10px;
+    color: black;
+    padding: 30px 40px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, .2);
+    backdrop-filter: blur(1px);
+}
+
+.container h1 {
+    font-size: 36px;
+    text-align: center;
+}
+
+/* --- Input Box (Campo de Usuário e Senha) --- */
+
+.input-box {
+    position: relative;
+    width: 100%;
+    height: 50px;
+    margin: 30px 0;
+}
+
+.input-box input {
+    width: 100%;
+    height: 100%;
+    background-color: #455A64; /* Azul Escuro */
+    border: 2px solid rgba(0, 0, 0, .2);
+    border-radius: 40px;
+    outline: none;
+    font-size: 16px;
+    color: white;
+    padding: 20px 45px 20px 20px;
+}
+
+.input-box input::placeholder {
+    color: rgb(211, 209, 209);
+}
+
+.input-box i {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 20px;
+    color: white; /* Adicionado para visibilidade no input escuro */
+}
+
+/* --- Lembrar e Esqueci a Senha --- */
+
+.remember-forgot {
+    display: flex;
+    justify-content: space-between;
+    margin: -15px 0px 15px;
+}
+
+.remember-forgot label input {
+    accent-color: black;
+    margin-right: 5px;
+}
+
+.remember-forgot a {
+    text-decoration: none;
+    color: #81C784; /* Verde Claro */
+}
+
+.remember-forgot a:hover {
+    text-decoration: underline;
+}
+
+/* --- Botão de Login --- */
+
+.login {
+    width: 100%;
+    box-shadow: 50px 50px 50px rgba(0, 0, 0, .1);
+    height: 50px;
+    background-color: #FF8A65; /* Laranja */
+    border: 2px solid #9000FF; /* Roxo Escuro - Borda */
+    border-radius: 40px;
+    cursor: pointer;
+    font-size: 16px;
+    color: #333;
+    font-weight: 600;
+    margin-top: 20px;
+    transition: all 0.5s; /* Adicionado para suavizar o hover */
+}
+
+.login:hover {
+    color: white;
+    box-shadow: 0 0 25px rgba(144, 0, 255, 0.4); /* Efeito de sombra roxa no hover */
+    /* transition: 0.5s; (Já está no .login) */
+}
+
+/* --- Link de Registro --- */
+
+.register-link {
+    font-size: 14px;
+    text-align: center;
+    margin: 20px 0 15px;
+}
+
+.register-link a {
+    text-decoration: none;
+    color: #81C784; /* Verde Claro */
+    font-weight: 600;
+}
+
+.register-link a:hover {
+    text-decoration: underline;
+}
+

@@ -10,8 +10,6 @@ class SessionController {
 
     public static function logout() {
         session_destroy();
-        header("Location: ../public/index.php");
-        exit;
     }
 
     public static function isLoggedIn() {
