@@ -11,9 +11,13 @@
         </div>
 
         <form id="categoryForm" action="<?= BASE_URL ?>/controller/CategoriaController.php" method="POST">
+            
+            <input type="hidden" name="action" id="categoryAction" value="create">
+            <input type="hidden" name="categoria_id" id="categoryID" value="">
+            
             <div class="modal-body">
                 <div class="input-group">
-                    <input type="text" name="descricao" placeholder="Descrição" required>
+                    <input type="text" name="descricao" placeholder="Descrição" id="descricao_categoria" required>
                     <i class="fas fa-save save-in-input-icon" id="saveCategoryIcon"></i>
                 </div>
             </div>

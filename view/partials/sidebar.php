@@ -6,15 +6,26 @@ require_once __DIR__ . '/../../config/db.php';
     
     <i class="fas fa-times close-btn" id="closeMenuBtn"></i>
 
-    <div class="menu-item">
-        <i class="fas fa-check-circle finished-icon"></i>
-        <span>Listar Tarefas Finalizadas</span>
-    </div>
+    <a href="<?= BASE_URL ?>/index.php" >
+        <div class="menu-item">
+            <i class="fas fa-home home-icon"></i> <span>Página Inicial</span>
+        </div>
+    </a>
+   
+    <a href="<?= BASE_URL ?>/view/tarefa/concluida.php" >
+        <div class="menu-item">
+            <i class="fas fa-check-circle finished-icon"></i>
+            <span>Listar Tarefas Finalizadas</span>
+        </div>
+    </a>
 
-    <div class="menu-item">
-        <i class="fas fa-sort-amount-up-alt category-icon"></i>
-        <span>Categorias mais Utilizadas</span>
-    </div>
+        <a href="<?= BASE_URL ?>/view/categoria/index.php" >
+        <div class="menu-item">
+            <i class="fas fa-sort-amount-up-alt category-icon"></i>
+            <span>Categorias Mais utilizadas</span>
+        </div>
+    </a>
+
 
     <div class="logout-container">
         <a href="<?= BASE_URL ?>/controller/LogoutController.php" class="logout-link">

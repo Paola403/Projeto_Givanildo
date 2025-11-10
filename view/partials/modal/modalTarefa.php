@@ -19,36 +19,48 @@ require_once __DIR__ ."../../modal/modalTarefa.php";
             </button>
         </div>
 
-        <form id="taskForm" action="controller/TarefaController.php" method="POST">
+        <form id="taskForm" action="<?= BASE_URL ?>/controller/TarefaController.php" method="POST">
+            
+            <input type="hidden" name="action" id="taskAction" value="create">
+            <input type="hidden" name="tarefa_id" id="taskID" value="">
+
             <div class="modal-body task-modal-body">
                 
-                <div class="input-full-width">
+        <div class="input-full-width">
                     <input type="text" name="titulo" placeholder="Título" required>
                 </div>
                 
+                <div class="input-select-group">
+                    <select name="categoria_id" required>
+                        <option value="" disabled selected>Categoria</option>
+            
+                        <?php 
+                        // Loop PHP para preencher as categorias
+                        if (isset($listaCategorias) && !empty($listaCategorias)) {
+                            foreach ($listaCategorias as $categoria) {
+                                // Assume que sua tabela Categoria tem CATE_ID e CATE_DESCRICAO
+                                echo "<option value=\"{$categoria['CATE_ID']}\">" 
+                                . htmlspecialchars(string: ucwords($categoria['CATE_DESCRICAO'])) 
+                                . "</option>";
+                            }
+                        } else {
+                            echo "<option value=\"\" disabled>Nenhuma categoria encontrada</option>";
+                        }
+                        ?>
+
+                    </select>
+                </div>
+                
                 <div class="input-row">
-                    <div class="input-select-group">
-                        <select name="categoria_id" required>
-                            <option value="" disabled selected>Categoria</option>
-                            
-                            <?php 
-                                // O PHP dinâmico irá preencher esta área:
-                                // if (isset($categorias) && is_array($categorias)) {
-                                //     foreach ($categorias as $cat) {
-                                //         echo "<option value=\"{$cat['CATE_ID']}\">{$cat['CATE_DESCRICAO']}</option>";
-                                //     }
-                                // }        
-                            ?>
-                            <option value="1">Trabalho</option>
-                            <option value="2">Pessoal</option>
-                            <option value="3">Estudos</option>
-                            
-                        </select>
+                    
+                    <div class="input-date-group">
+                        <label for="data_inicio">Início:</label>
+                        <input type="date" name="data_inicio" id="data_inicio" required>
                     </div>
 
                     <div class="input-date-group">
-                        <i class="far fa-calendar-alt date-icon"></i>
-                        <input type="date" name="data_vencimento" value="2025-08-31" required>
+                        <label for="data_fim">Fim:</label>
+                        <input type="date" name="data_fim" id="data_fim" required>
                     </div>
                 </div>
 

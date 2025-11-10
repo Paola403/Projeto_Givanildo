@@ -28,13 +28,13 @@
                     <i class="fas fa-lock"></i>    
                 </div>
 
-                <div class="remember-forgot">
+                <!-- <div class="remember-forgot">
                     <label>
                         <input type="checkbox" name="remember">
                             Lembrar Senha
                         </label>
                     <a href="#">Esqueci minha Senha</a>
-                </div>
+                </div> -->
 
                 <button type="submit" class="login">Login</button>
 

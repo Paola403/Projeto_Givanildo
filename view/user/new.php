@@ -31,16 +31,20 @@ require_once __DIR__ . '/../../utils/SessionController.php';
                     <input placeholder="Confirme Sua Senha:" type="password" name="confirmar_senha">
                     <i class="bx bxs-lock-alt"></i>    
                 </div>
-
+                <!-- 
                 <div class="remember-forgot">
                     <label>
                     <input type="checkbox">
                     Lembrar Senha
                     </label>
                     <a href="#">Esqueci minha Senha</a>
-                </div>
+                </div> -->
 
                 <button type="submit" class="login">Cadastrar</button>
+                
+                <div class="register-link">
+                    <p>Já Possui Uma Conta? <a href="<?= BASE_URL ?>/view/user/index.php"> Clique Aqui!</a></p>
+                </div>
 
 
         </form>

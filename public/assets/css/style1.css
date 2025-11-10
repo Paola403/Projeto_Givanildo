@@ -103,6 +103,8 @@ body {
     flex-grow: 1;
 }
 
+
+
 .task-status-circle {
     width: 14px;
     height: 14px;
@@ -112,6 +114,16 @@ body {
     background-color: var(--color-card-background);
     cursor: pointer;
     flex-shrink: 0;
+}
+
+.task-status-circle.finished {
+    /* Remove a borda e preenche o fundo */
+    border: none; 
+    background-color: var(--color-green-success, #4CAF50); /* Cor de sucesso (Verde) */
+    
+    /* Ajuste de tamanho para compensar a borda removida */
+    width: 14px; 
+    height: 14px; 
 }
 
 .task-details {
@@ -143,9 +155,95 @@ body {
     cursor: pointer;
 }
 
+/* ----------------------------------------------------------------
+   REGRAS ESPECÍFICAS APENAS PARA A PÁGINA DE CATEGORIAS
+   ---------------------------------------------------------------- */
+
+/* 1. Alinha todos os elementos do item da categoria (Nome | Contagem | Ações) */
+#category-main-container .task-item .task-info {
+    display: flex;
+    align-items: center; 
+    justify-content: space-between; 
+    width: 100%;
+}
+
+/* 2. Garante que o nome da categoria ocupe o espaço necessário */
+#category-main-container .task-info .task-details {
+    flex-grow: 1; 
+    margin-right: 15px;
+}
+
+#category-main-container .task-info .task-title {
+    margin: 0; 
+    font-size: 1em;
+    word-wrap: break-word; 
+}
+
+/* 3. Alinha os ícones de ação */
+#category-main-container .task-actions.category-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px; 
+    margin-left: 15px; 
+    /* Adicione um width fixo se precisar garantir que os botões não oscilem */
+    /* width: 60px; */ 
+}
+
+/* 4. Estilos básicos para os botões (se já não estiverem definidos globalmente) */
+#category-main-container .task-actions .delete-btn-submit {
+    line-height: 1;
+    /* ... outros estilos de botão ... */
+}
+
+/* style.css */
+
+/* 1. Reset para o Formulário de Finalização */
+.complete-form {
+    display: inline-block;
+    line-height: 1;
+}
+
+/* 2. Reseta o botão de submit (igual ao delete-btn-submit) */
+.complete-btn-submit {
+    background: none;
+    border: none; 
+    cursor: pointer;
+    padding: 0;
+    margin: 0 5px; /* Adiciona uma pequena margem para separar os ícones */
+    outline: none; 
+    transition: color 0.2s;
+}
+
+/* 3. Estilo do Ícone de Visto */
+.complete-icon {
+    /* Define a cor verde para o ícone */
+    color: var(--color-green-success, #4CAF50); 
+    font-size: 1.1em; /* Levemente maior que os outros para destaque */
+}
+
+/* 4. Efeito de Hover (Opcional, mas recomendado) */
+.complete-btn-submit:hover .complete-icon {
+    color: var(--color-dark-green, #45A049); /* Escurece um pouco no hover */
+}
+
+.delete-btn-submit {
+    background: none;
+    border: none; 
+    cursor: pointer;
+    padding: 0; 
+    margin: 0; 
+    outline: none; 
+    
+
+    color: var(--color-text-medium); 
+    font-size: 1em; 
+    transition: color 0.2s;
+}
+
 .delete-icon {
     color: var(--color-danger-red);
     cursor: pointer;
+    
 }
 
 /* --- Opções de Adicionar --- */
@@ -229,6 +327,14 @@ body {
     font-size: 28px;
     margin-right: 20px;
     flex-shrink: 0;
+}
+
+/* style.css (Apenas para garantir que o ícone de casa tem cor e espaçamento, 
+             embora já deva funcionar com os estilos de .menu-item-content i) */
+
+.menu-item-content i.home-icon {
+    margin-right: 10px; /* Garante o espaçamento entre o ícone e o texto */
+    /* Você pode adicionar uma cor específica, se quiser. Ex: color: var(--color-blue); */
 }
 
 .finished-icon {
@@ -404,13 +510,27 @@ body {
 }
 
 .input-date-group {
-    flex: 1; /* Ocupa 1/3 do espaço */
+    flex: 1; /* Ocupa 50% da linha */
     display: flex;
     align-items: center;
-    background-color: var(--color-card-background); /* Fundo branco */
+    background-color: var(--color-card-background); 
     border: 1px solid #ccc;
     border-radius: 8px;
     padding: 0 10px;
+}
+
+.input-date-group label {
+    font-size: 0.9em;
+    color: var(--color-text-medium);
+    margin-right: 5px;
+}
+
+.input-date-group input[type="date"] {
+    border: none;
+    padding: 12px 0; 
+    text-align: right;
+    width: 100%;
+    outline: none;
 }
 
 .input-date-group input {
@@ -649,3 +769,34 @@ title {
     text-decoration: underline;
 }
 
+/* ======================================================= */
+/* 10. Mensagem de boas-vindas           */
+/* ======================================================= */
+
+/* style.css */
+
+/* Novo container que envolve apenas a mensagem */
+.header-content-wrapper {
+    width: 100%;
+    /* Pode adicionar um padding para o container principal se necessário */
+    padding: 20px 20px 0 20px; 
+}
+
+/* Estilo da Mensagem (Centralização e Aparência) */
+.welcome-message {
+    width: 100%;
+    margin-bottom: 30px; 
+    padding: 15px 0 20px 0;
+    
+    /* Centraliza o texto dentro da div */
+    text-align: center; 
+}
+
+.welcome-message h1 {
+    /* Aparência da fonte */
+    font-size: 2.2em; 
+    font-weight: 700; 
+    color: var(--color-primary, #333); 
+    letter-spacing: -0.5px; 
+    margin: 0;
+}
