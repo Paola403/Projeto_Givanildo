@@ -23,7 +23,8 @@ class Database {
         return $this->pdo;
     }
 }
-define('BASE_URL', '/Projeto_Givanildo');
+define('BASE_URL', '/');
+
 
 
 ?>
