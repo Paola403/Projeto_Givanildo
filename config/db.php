@@ -23,7 +23,7 @@ class Database {
         return $this->pdo;
     }
 }
-define('BASE_URL', '/');
+define('BASE_URL', '/projeto-givanildo-82e0a.wasmer.app');
 
 
 ?>
