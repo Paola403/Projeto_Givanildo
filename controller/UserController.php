@@ -2,7 +2,7 @@
 // Define o caminho base e carrega dependências
 require_once __DIR__ . '/../config/db.php';
 require_once __DIR__ . '/../model/UserModel.php';
-require_once __DIR__ . '/../utils/SessionController.php'; // Mantido, mas não usado para mensagens neste modo
+require_once __DIR__ . '/../utils/SessionController.php'; // Mantido
 
 // Inicia a sessão se ainda não estiver iniciada
 if (session_status() == PHP_SESSION_NONE) {
@@ -10,7 +10,7 @@ if (session_status() == PHP_SESSION_NONE) {
 }
 
 // 1. Definição das URLs de redirecionamento (Certifique-se de que BASE_URL está correto)
-$redirect_new = BASE_URL . '/view/user/new.php'; // Cadastro
+$redirect_new = BASE_URL . '/view/user/new.php'; // Cadastro (New Account)
 $redirect_edit = BASE_URL . '/view/user/edit.php'; // Edição de perfil
 $redirect_login = BASE_URL . '/view/user/index.php'; // Login/Index
 
@@ -28,14 +28,13 @@ function redirectToError(string $url, string $errorCode): void {
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
     // 2. Coleta e sanitização de dados
-    // CORREÇÃO: Removida a concatenação errada no filter_input
+    // Se a ação não for passada (formulário de novo usuário não tem campo action), define como 'insert'.
     $action = filter_input(INPUT_POST, 'action', FILTER_SANITIZE_SPECIAL_CHARS) ?? 'insert';
     
     $nome = filter_input(INPUT_POST, 'name', FILTER_SANITIZE_SPECIAL_CHARS) ?? '';
     $login = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL) ?? '';
     $senha = $_POST['password'] ?? '';
     $confirmar_senha = $_POST['confirmar_senha'] ?? '';
-    $erros_encontrados = false;
     
     // Instancia o modelo
     $userModel = new UserModel();
@@ -43,8 +42,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     switch ($action) {
         
         case 'update':
-            // LÓGICA DE ATUALIZAÇÃO (EDIÇÃO DE PERFIL)
-
+            // ... LÓGICA DE ATUALIZAÇÃO (EDIÇÃO DE PERFIL) (Mantida do original)
+            
             // Coleta o ID do usuário (campo hidden)
             $id_usuario = filter_input(INPUT_POST, 'id_usuario', FILTER_VALIDATE_INT);
             $redirect_location = $redirect_edit; // Em caso de erro, volta para a edição
@@ -106,12 +105,63 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 redirectToError($redirect_location, 'ERRO_INTERNO_DB');
             }
 
-            break;
+            break; // Fim do 'update'
 
         case 'insert':
+            // =======================================================
+            // LÓGICA DE CADASTRO DE NOVO USUÁRIO (INSERT)
+            // =======================================================
+            $redirect_location = $redirect_new; // Em caso de erro, volta para o cadastro
+
+            // 1. Validação de campos obrigatórios (Nome, Email, Senha, Confirmação)
+            if (empty($nome) || empty($login) || empty($senha) || empty($confirmar_senha)) {
+                redirectToError($redirect_location, 'CAMPOS_VAZIOS');
+            }
+
+            // 2. Validação de senhas
+            if ($senha !== $confirmar_senha) {
+                redirectToError($redirect_location, 'SENHAS_DIFERENTES');
+            }
+
+            // 3. Validação do formato do Email
+            if (!filter_var($login, FILTER_VALIDATE_EMAIL)) {
+                redirectToError($redirect_location, 'EMAIL_INVALIDO');
+            }
+
+            // 4. Verificação de unicidade do Email (Login)
+            try {
+                if ($userModel->buscarPorLogin($login)) {
+                    redirectToError($redirect_location, 'EMAIL_EXISTENTE');
+                }
+            } catch (\Exception $e) {
+                 error_log("Erro ao buscar login (Exceção): " . $e->getMessage());
+                 redirectToError($redirect_location, 'ERRO_INTERNO_DB');
+            }
+            
+            // 5. Preparação e Inserção
+            $senha_hashed = password_hash($senha, PASSWORD_DEFAULT);
+
+            try {
+                if ($userModel->inserir($nome, $login, $senha_hashed)) {
+                    // SUCESSO! Redireciona para a página de login.
+                    header('Location: ' . $redirect_login . '?status=SUCESSO_CADASTRO'); 
+                    exit;
+                } else {
+                    // ERRO: FALHA_AO_INSERIR -> O Model falhou em algum ponto não capturado por exceção.
+                    redirectToError($redirect_location, 'FALHA_AO_INSERIR');
+                }
+            } catch (\Exception $e) {
+                error_log("Erro na inserção (Exceção): " . $e->getMessage());
+                redirectToError($redirect_location, 'ERRO_INTERNO_DB');
+            }
+
+            break; // Fim do 'insert'
+            
         default:
-            // LÓGICA DE CADASTRO (Simplificada para apenas redirecionar com erro se não for 'update')
-            // Se cair aqui e não for 'insert' válido (caiu no 'default'), é um erro de ação.
+            // =======================================================
+            // AÇÃO INVÁLIDA (Qualquer coisa que não seja 'update' ou 'insert')
+            // =======================================================
+            // Agora, apenas a ação desconhecida cai aqui.
             redirectToError($redirect_new, 'ACAO_INVALIDA');
             break;
     } 

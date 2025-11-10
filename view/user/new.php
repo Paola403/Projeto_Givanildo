@@ -69,8 +69,10 @@
 <body class="flex items-center justify-center min-h-screen">
     <main class="container">
         <!-- Ação do formulário deve ir para o controlador de registro -->
-        <form action="<?= BASE_URL ?>/controller/RegisterController.php" method="POST">  
+        <form action="<?= BASE_URL ?>/controller/UserController.php" method="POST">  
             <h1 class="text-3xl font-bold mb-6 text-center text-gray-800">Cadastro</h1>  
+            <input type="hidden" name="action" value="insert">
+
             
             <!-- BLOCo DE EXIBIÇÃO DE ALERTAS (Flash Messages) -->
             <?php if (!empty($alerts)): ?>
