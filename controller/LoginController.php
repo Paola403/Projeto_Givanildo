@@ -11,24 +11,27 @@ if (session_status() == PHP_SESSION_NONE) {
 
 // Verifica se a requisição é um POST
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    header('Location: ' . BASE_URL . '/view/user/index.php?error=invalid_request');
+    // Define o alerta e redireciona
+    SessionController::setAlert('error', 'Método de requisição inválido.');
+    header('Location: ' . BASE_URL . '/view/user/index.php');
     exit;
 }
 
 // 1. Recebe e sanitiza os dados do formulário
 $login_attempt = filter_input(INPUT_POST, 'login', FILTER_SANITIZE_EMAIL);
-$senha_attempt = $_POST['senha'] ?? ''; // Senha não deve ser sanitizada, apenas validada/verificada
+$senha_attempt = $_POST['senha'] ?? ''; // Senha não deve ser sanitizada
 
 if (empty($login_attempt) || empty($senha_attempt)) {
-    header('Location: ' . BASE_URL . '/view/user/index.php?error=empty_fields');
+    // Define o alerta e redireciona
+    SessionController::setAlert('warning', 'Por favor, preencha todos os campos (Login e Senha).');
+    header('Location: ' . BASE_URL . '/view/user/index.php');
     exit;
 }
 
 try {
     $userModel = new UserModel();
     
-    // 2. Tenta autenticar o usuário (o UserModel::autenticar já faz o password_verify)
-    // O resultado é o array do usuário em caso de sucesso, ou false em caso de falha.
+    // 2. Tenta autenticar o usuário
     $user = $userModel->autenticar($login_attempt, $senha_attempt);
     
     if ($user) {
@@ -41,19 +44,23 @@ try {
             $user['CLI_NOME']
         );
         
-        // 4. Redireciona para a página principal/mural de tarefas
+        // 4. Redireciona para a página principal
         header('Location: ' . BASE_URL . '/index.php');
         exit;
         
     } else {
         // 5. Autenticação Falhou (Login ou Senha incorretos)
-        header('Location: ' . BASE_URL . '/view/user/index.php?error=invalid_credentials');
+        // Define o alerta e redireciona
+        SessionController::setAlert('error', 'Login ou Senha incorretos. Tente novamente.');
+        header('Location: ' . BASE_URL . '/view/user/index.php');
         exit;
     }
 
 } catch (\Exception $e) {
     // Log de erro interno
     error_log("Erro de Login: " . $e->getMessage());
-    header('Location: ' . BASE_URL . '/view/user/index.php?error=internal_error');
+    // Define o alerta de erro interno e redireciona
+    SessionController::setAlert('error', 'Ocorreu um erro interno. Tente novamente mais tarde.');
+    header('Location: ' . BASE_URL . '/view/user/index.php');
     exit;
 }

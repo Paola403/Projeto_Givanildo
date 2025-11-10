@@ -108,10 +108,11 @@ body {
 .task-status-circle {
     width: 14px;
     height: 14px;
-    border: 2px solid #ccc;
+    border: none;
+    background-color: #ccc;
     border-radius: 50%;
     margin-right: 15px;
-    background-color: var(--color-card-background);
+    /* background-color: var(--color-card-background); */
     cursor: pointer;
     flex-shrink: 0;
 }
@@ -268,13 +269,13 @@ body {
 /* ======================================================= */
 /* 6. MENU LATERAL (SIDEBAR) - Com Estilos Limpos          */
 /* ======================================================= */
-.sidebar-menu {
+#sidebarMenu {
     height: 100%;
     width: var(--sidebar-width);
     position: fixed;
     z-index: 1000;
     top: 0;
-    left: calc(0px - var(--sidebar-width)); /* Usa a variável para esconder */
+    transform: translatex(0px - var(--sidebar-width)); /* Usa a variável para esconder */
     background-color: var(--color-background-soft);
     overflow-x: hidden;
     padding-top: 60px;
@@ -284,7 +285,7 @@ body {
     flex-direction: column;
 }
 
-.sidebar-menu.active {
+#sidebarMenu.active {
     left: 0;
 }
 
@@ -295,6 +296,39 @@ body {
     font-size: 30px;
     color: var(--color-text-dark);
     cursor: pointer;
+}
+
+#sidebarOverlay {
+    position: fixed; /* Fixa na viewport, cobrindo tudo */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    
+    /* Cor preta com 40% de opacidade */
+    background-color: rgba(0, 0, 0, 0.4); 
+    
+    /* Garante que o overlay fique abaixo do modal, mas acima do conteúdo */
+    z-index: 99; 
+
+    /* Inicialmente oculto */
+    opacity: 0;
+    visibility: hidden; 
+
+    /* Transição suave para o efeito de escurecer/clarear */
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+/* Classe ativadora: Adicionada pelo JavaScript */
+#sidebarOverlay.visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Opcional: Garante que a sidebar fique acima do overlay */
+.sidebar {
+    /* O valor deve ser maior que o z-index do overlay (ex: 99 + 1) */
+    z-index: 100; 
 }
 
 /* --- Itens de Menu Principais (Estilização Única) --- */
@@ -753,20 +787,25 @@ title {
 
 /* --- Link de Registro --- */
 
-.register-link {
-    font-size: 14px;
-    text-align: center;
-    margin: 20px 0 15px;
+a {
+    text-decoration: none; /* Isso remove o sublinhado em estado normal */
+    color: inherit;       /* Garante que o link herde a cor do pai, se for o caso */
 }
 
-.register-link a {
+.register-link a, .remember-forgot a {
+    text-decoration: none; /* Remove o sublinhado padrão dos seus links */
+    color: #81C784; /* Mantém a cor original do seu CSS */
+}
+
+/* 3. Aplica o sublinhado APENAS quando o mouse passar por links específicos */
+.register-link a:hover, .remember-forgot a:hover {
+    text-decoration: underline; /* Seu estilo de sublinhado ao passar o mouse */
+}
+
+/* Se o ícone estiver em um lugar específico (ex: uma lista de ações), 
+   você pode ser mais específico: */
+.lista-de-acoes a {
     text-decoration: none;
-    color: #81C784; /* Verde Claro */
-    font-weight: 600;
-}
-
-.register-link a:hover {
-    text-decoration: underline;
 }
 
 /* ======================================================= */

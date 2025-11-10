@@ -6,6 +6,15 @@ const openTaskBtn = document.querySelector('.add-options .add-item:nth-child(2)'
 const closeTaskModalBtn = document.getElementById('closeTaskModal');
 const saveTaskIcon = document.getElementById('saveTaskIcon'); 
 const submitTaskForm = document.getElementById('submitTaskBtn');
+const dataInicioField = document.getElementById('data_inicio');
+const dataFimField = document.getElementById('data_fim');
+
+// --- FUNÇÃO AUXILIAR: Obtém a data de hoje no formato YYYY-MM-DD ---
+function getTodayDateString() {
+    const today = new Date();
+    // Obtém a data no formato 'YYYY-MM-DD'
+    return today.toISOString().slice(0, 10);
+}
 
 // Botões de edição (o ícone de lápis)
 const editButtons = document.querySelectorAll('.edit-task-btn'); 
@@ -29,6 +38,19 @@ function prepareAndOpenTaskModal(mode) {
         taskModalTitle.textContent = (mode === 'create') ? 'Nova Tarefa' : 'Editar Tarefa';
     }
 
+    // 🔑 NOVO CÓDIGO AQUI: Preenchimento automático de data, SÓ no modo 'create'
+    if (mode === 'create') {
+        const today = getTodayDateString(); 
+        
+        if (dataInicioField) {
+            dataInicioField.value = today; 
+        }
+        
+        if (dataFimField) {
+            dataFimField.value = today; 
+        }
+    }
+
     // 4. Torna o modal visível
     taskModal.classList.add('visible');
 }
@@ -47,6 +69,7 @@ if (openTaskBtn && taskModal) {
     openTaskBtn.addEventListener('click', () => {
         // Prepara e abre no modo "create"
         prepareAndOpenTaskModal('create');
+        
     });
 }
 

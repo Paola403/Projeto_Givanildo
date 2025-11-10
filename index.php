@@ -130,6 +130,12 @@
                             </span>
                         </div>
                     </div>
+                        <form action="<?= BASE_URL ?>/controller/TarefaController.php" method="POST" class="complete-form">
+                        <input type="hidden" name="action" value="complete"> <input type="hidden" name="tarefa_id" value="<?php echo $tarefa['TAREFA_ID']; ?>">
+                        <button type="submit" class="complete-btn-submit" title="Finalizar Tarefa">
+                            <i class="fas fa-check-circle complete-icon"></i>
+                        </button>
+                    </form>
                     <div class="task-actions">  
                         <i class="fas fa-pencil-alt edit-icon edit-task-btn"
                             data-id="<?php echo $tarefa['TAREFA_ID']; ?>"

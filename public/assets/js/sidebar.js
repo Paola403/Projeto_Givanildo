@@ -3,18 +3,22 @@ document.addEventListener('DOMContentLoaded', () => {
     const openBtn = document.getElementById('openMenuBtn');
     const closeBtn = document.getElementById('closeMenuBtn');
     const sidebar = document.getElementById('sidebarMenu');
+    const sidebarOverlay = document.getElementById('sidebarOverlay');
     // const mainContent = document.getElementById('mainContent'); // Usado se for mover o conteúdo
 
     // 2. Função para Abrir o Menu
     const openMenu = () => {
-        sidebar.classList.add('active');
-        // mainContent.classList.add('shift-content'); // Opcional: Para mover o conteúdo
+        
+        sidebar.classList.add('visible');
+        if (sidebarOverlay) sidebarOverlay.classList.add('visible');
+                // mainContent.classList.add('shift-content'); // Opcional: Para mover o conteúdo
     };
 
     // 3. Função para Fechar o Menu
     const closeMenu = () => {
-        sidebar.classList.remove('active');
-        // mainContent.classList.remove('shift-content'); // Opcional: Para mover o conteúdo
+        sidebar.classList.remove('visible');
+        if (sidebarOverlay) sidebarOverlay.classList.remove('visible');
+                // mainContent.classList.remove('shift-content'); // Opcional: Para mover o conteúdo
     };
 
     // 4. Adicionar Listeners de Eventos

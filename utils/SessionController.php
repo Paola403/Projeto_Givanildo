@@ -11,6 +11,16 @@ class SessionController {
     public static function logout() {
         session_destroy();
     }
+    public static function setAlert(string $type, string $message): void {
+        // Armazena a mensagem
+        $_SESSION['alerts'][] = ['type' => $type, 'message' => $message];
+    }
+
+        public static function getAlerts(): array {
+        $alerts = $_SESSION['alerts'] ?? []; // Pega os alertas
+        unset($_SESSION['alerts']); // Limpa os alertas após a leitura
+        return $alerts;
+    }
 
     public static function isLoggedIn() {
         return isset($_SESSION['id_usuario']);
