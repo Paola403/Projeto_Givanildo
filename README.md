@@ -18,17 +18,22 @@ O projeto foi desenvolvido aplicando os conceitos de **engenharia de software** 
 ```bash
 📁 Projeto_Givanildo/
 │
-├── 📁 documentação/       # Documentação e Diagramas
-├── 📁 data/               # Modelos conceitual, lógico e físico + dicionário de dados
+├── 📁 Docs/
+|    └── 📁 Documentação/ # Documentação e Diagramas
+|    |    ├── 📁 Caso de Uso/ # PNG Caso de Uso
+|    |    └── 📁 Diagrama de Classe/ PNG Diagrama de Classe
+|    └── 📁 Data/  # Modelos conceitual, lógico e físico + dicionário de dados
 ├── 📁 config/             # Arquivos de configuração e conexão com o banco (db.php via PDO)
 ├── 📁 controller/         # Controladores (CategoriaController.php, UserController.php, TarefaController.php)
 ├── 📁 model/              # Regras de negócio e acesso ao banco de dados
-├── 📁 public/             # Arquivos públicos (CSS, JS, imagens, etc.)
-│   └── 📁 partials/       # Componentes reutilizáveis (header, navbar, footer)
-├── 📁 views/              # Páginas e formulários do sistema
-│   ├── 📁 tarefa/         # Telas de gerenciamento de tarefas
-│   ├── 📁 categoria/      # Telas de categorias e edição
-│   └── 📁 user/           # Telas de login e cadastro
+├── 📁 public/assets/      # Arquivos públicos (CSS, JS, imagens, etc.)
+│   └── 📁 css/            # CSS do site
+|   └── 📁 js/             # Java Script do site
+├── 📁 utils/              # Pasta de utilitários
+├── 📁 view/               # Páginas e formulários do sistema
+│   ├── 📁 categoria/      # Telas de gerenciamento de categoria
+│   ├── 📁 partials/       # Partes reutilizáveis das views (como header, footer, etc.)
+│   └── 📁 tarefa/         # Telas de gerenciamento de tarefas
 └── README.md              # Documentação principal do projeto
 ```
 

@@ -1,1 +1,49 @@
-Informações dos arquivos nessa pasta
+##📁 Estrutura e Documentação do Repositório (Projeto Givanildo)
+
+Este repositório contém os principais artefatos de **Modelagem de Dados** e a estrutura SQL de um projeto, além de documentação de apoio.
+
+Todos os arquivos foram adicionados como parte da tarefa de "front end - mudança de pastas", indicando uma reorganização geral do projeto.
+
+---
+
+## 💾 Detalhamento dos Arquivos
+
+Os arquivos estão divididos em categorias para facilitar a identificação de sua finalidade.
+
+## 1. Modelos de Dados e Diagramas (Arquivos Visuais)
+
+Estes arquivos contêm a representação visual e conceitual da estrutura do banco de dados.
+
+* **`Conceitual_Givanildo.png`**
+    * Diagrama que exibe o **Modelo Conceitual** do banco de dados. Ele foca nas entidades (conceitos) e nos relacionamentos entre elas, de forma abstrata e independente de tecnologia.
+
+* **`Logico_Givanildo.PNG`**
+    * Diagrama que exibe o **Modelo Lógico** do banco de dados. Define as tabelas, colunas, chaves primárias e estrangeiras, representando a estrutura que será implementada.
+
+## 2. Definição do Modelo e Dicionário
+
+Estes arquivos contêm a definição técnica e a documentação completa da estrutura.
+
+* **`Dicionario_Dados_Givanildo.xlsx`**
+    * Planilha Excel que atua como **Dicionário de Dados**. Documenta detalhadamente cada tabela, campo, tipo de dado, tamanho, restrições e descrição de uso.
+
+* **`Givanildo.brM3`**
+    * Arquivo de modelo de dados (*BRModelo* ou similar) que armazena o **Modelo de Dados completo (Conceitual/Lógico)**, contendo todas as definições usadas para gerar os diagramas e o script SQL.
+
+* **`Givanildo_Logico.brM3`**
+    * Arquivo de modelo de dados focado especificamente na definição do **Modelo Lógico**. Pode ser uma cópia ou um detalhamento do arquivo `.brM3` principal.
+
+## 3. Implementação e Documentação
+
+Arquivos necessários para a execução e entendimento do projeto.
+
+| Arquivo | Conteúdo Principal | Finalidade |
+| :--- | :--- | :--- |
+| **`givanildo.sql`** | **Script SQL (DDL/DML)** | Contém os comandos SQL para criar a estrutura do banco de dados (tabelas, índices, constraints) e, possivelmente, dados iniciais. |
+| **`README`** | **Documentação** | Este arquivo, fornecendo uma visão geral e explicação sobre o propósito de cada item no repositório. |
+
+---
+
+## 📝 Próximos Passos
+
+Para utilizar ou revisar
