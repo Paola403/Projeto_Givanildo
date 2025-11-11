@@ -1,4 +1,4 @@
-### 📁 Estrutura e Documentação do Repositório (Projeto Givanildo)
+##📁 Estrutura e Documentação do Repositório (Projeto Givanildo)
 
 Este repositório contém os principais artefatos de **Modelagem de Dados** e a estrutura SQL de um projeto, além de documentação de apoio.
 
@@ -6,11 +6,11 @@ Todos os arquivos foram adicionados como parte da tarefa de "front end - mudanç
 
 ---
 
-### 💾 Detalhamento dos Arquivos
+## 💾 Detalhamento dos Arquivos
 
 Os arquivos estão divididos em categorias para facilitar a identificação de sua finalidade.
 
-### 1. Modelos de Dados e Diagramas (Arquivos Visuais)
+## 1. Modelos de Dados e Diagramas (Arquivos Visuais)
 
 Estes arquivos contêm a representação visual e conceitual da estrutura do banco de dados.
 
@@ -20,7 +20,7 @@ Estes arquivos contêm a representação visual e conceitual da estrutura do ban
 * **`Logico_Givanildo.PNG`**
     * Diagrama que exibe o **Modelo Lógico** do banco de dados. Define as tabelas, colunas, chaves primárias e estrangeiras, representando a estrutura que será implementada.
 
-### 2. Definição do Modelo e Dicionário
+## 2. Definição do Modelo e Dicionário
 
 Estes arquivos contêm a definição técnica e a documentação completa da estrutura.
 
@@ -33,7 +33,7 @@ Estes arquivos contêm a definição técnica e a documentação completa da est
 * **`Givanildo_Logico.brM3`**
     * Arquivo de modelo de dados focado especificamente na definição do **Modelo Lógico**. Pode ser uma cópia ou um detalhamento do arquivo `.brM3` principal.
 
-### 3. Implementação e Documentação
+## 3. Implementação e Documentação
 
 Arquivos necessários para a execução e entendimento do projeto.
 
@@ -44,6 +44,6 @@ Arquivos necessários para a execução e entendimento do projeto.
 
 ---
 
-### 📝 Próximos Passos
+## 📝 Próximos Passos
 
 Para utilizar ou revisar
