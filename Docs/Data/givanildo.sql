@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 05/11/2025 às 02:01
+-- Tempo de geração: 11/11/2025 às 19:41
 -- Versão do servidor: 10.4.28-MariaDB
 -- Versão do PHP: 8.2.4
 
@@ -57,6 +57,7 @@ CREATE TABLE `tb_tarefa` (
   `TAREFA_DESCRICAO` varchar(250) DEFAULT NULL,
   `TAREFA_DATA_INICIO` datetime DEFAULT NULL,
   `TAREFA_DATA_FIM` datetime DEFAULT NULL,
+  `TAREFA_DATA_FINALIZADA` datetime DEFAULT NULL,
   `TAREFA_STATUS` char(1) DEFAULT NULL,
   `TAREFA_FINALIZADA` tinyint(1) DEFAULT NULL,
   `TAREFA_CLIENTE` int(11) DEFAULT NULL,

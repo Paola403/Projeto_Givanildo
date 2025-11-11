@@ -10,6 +10,7 @@ usecase "Mudança de Status das tarefas" as UC5
 usecase "Criação de categorias" as UC6
 usecase "Edição de categorias" as UC7
 usecase "Exclusão de categorias" as UC6
+usecase "Alteração de Informações User" as UC7
 
 
 c --> UC1

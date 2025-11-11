@@ -8,6 +8,7 @@ actor Cliente as C
 usecase "Realizar login" as UC_Login
 usecase "Gerenciar tarefas" as UC_Tarefas
 usecase "Gerenciar categorias" as UC_Categorias
+usecase "Gerenciar informações" as UC_User
 
 ' Casos de uso detalhados (incluídos nos genéricos)
 usecase "Criar tarefa" as UC_CriarTarefa
@@ -19,10 +20,13 @@ usecase "Criar categoria" as UC_CriarCategoria
 usecase "Editar categoria" as UC_EditarCategoria
 usecase "Excluir categoria" as UC_ExcluirCategoria
 
+usecase "Alterar informações User" as UC_EditarUser
+
 ' Relacionamentos principais
 C --> UC_Login
 C --> UC_Tarefas
 C --> UC_Categorias
+C --> UC_User
 
 ' Inclusões de funcionalidades específicas
 UC_Tarefas --> UC_CriarTarefa : <<include>>
@@ -33,5 +37,7 @@ UC_Tarefas --> UC_AlterarStatus : <<include>>
 UC_Categorias --> UC_CriarCategoria : <<include>>
 UC_Categorias --> UC_EditarCategoria : <<include>>
 UC_Categorias --> UC_ExcluirCategoria : <<include>>
+
+UC_User --> UC_EditarUser : <<include>>
 
 @enduml
