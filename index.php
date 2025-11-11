@@ -1,12 +1,23 @@
 <?php
     // --- 1. INCLUSÕES E CONFIGURAÇÃO ---
+    // Inicia a sessão (se já não estiver iniciada em outro lugar)
+
+    
     require_once __DIR__ . '/view/partials/header.php'; // Contém BASE_URL e CSS
     require_once __DIR__ . '/view/partials/sidebar.php';
     require_once __DIR__ . '/utils/SecurityGuard.php';  // Garante que o usuário está logado
     require_once __DIR__ . '/model/CategoriaModel.php'; // Para o modal
     require_once __DIR__ . '/model/TarefaModel.php';    // Para listar tarefas
 
-    $nomeUsuario = SessionController::getNomeUsuario();
+    // =======================================================================
+    // [CORREÇÃO AQUI]: LER O NOME DIRETAMENTE DO ARRAY DA SESSÃO ATUALIZADA
+    // Puxa o array do usuário logado da sessão
+    $usuarioLogado = $_SESSION['usuario'] ?? []; 
+
+    // Define $nomeUsuario lendo o campo 'CLI_NOME' (ou a chave correta do seu DB)
+    // Se a sessão estiver vazia, usa 'Usuário' como fallback.
+    $nomeUsuario = $usuarioLogado['CLI_NOME'] ?? 'Usuário';
+    // =======================================================================
 
     // Busca categorias para o modal (você já tinha isso)
     $categoriaModel = new CategoriaModel();
@@ -15,6 +26,7 @@
     // --- 2. LÓGICA DE BUSCA E SEPARAÇÃO DE TAREFAS ---
     
     // Pega o ID do usuário logado (pela sessão)
+    // Manter a chamada SessionController::getIdUsuario() é OK, pois o ID não muda.
     $cliente_id = SessionController::getIdUsuario();
 
     // Busca todas as tarefas do cliente no banco
@@ -38,17 +50,22 @@
         $dataInicio = new DateTime($tarefa['TAREFA_DATA_INICIO']);
 
         // Compara a data de término com hoje
-        if ($dataFim < $hoje)   {
+        if ($dataFim < $hoje)  {
             // Se a data de término for anterior a hoje, está atrasada
             $tarefas_atrasadas[] = $tarefa;
         } else {
             // Senão, está pendente
             $tarefas_pendentes[] = $tarefa;
+            // Verifica se a tarefa é de hoje (opcional, para destaque)
+            if ($dataFim->format('Y-m-d') === $hoje->format('Y-m-d')) {
+                // Tarefa para hoje
+                $tarefa['hoje'] = true;
+            }
         }
     }
 ?>
-       
-       <div class="header-content-wrapper">
+        
+        <div class="header-content-wrapper">
             <div class="welcome-message">
                 <h1>
                     Seja Bem-Vindo(a) À Sua Agenda, 
@@ -56,7 +73,7 @@
                 </h1>
             </div>
         </div>
-   
+        
         <div class="main-container">
 
         <div class="card-column tarefas">
@@ -90,7 +107,7 @@
                             data-descricao="<?php echo htmlspecialchars($tarefa['TAREFA_DESCRICAO']); ?>"
                             data-categoria="<?php echo $tarefa['TAREFA_CATEGORIA']; ?>"
                             data-datainicio="<?php echo substr($tarefa['TAREFA_DATA_INICIO'], 0, 10); ?>"
-                            data-datafim="<?php echo substr($tarefa['TAREFA_DATA_FIM'], 0, 10); ?>">                        </i>
+                            data-datafim="<?php echo substr($tarefa['TAREFA_DATA_FIM'], 0, 10); ?>">                         </i>
                         
                         <form action="<?= BASE_URL ?>/controller/TarefaController.php" method="POST" class="delete-form">
                             <input type="hidden" name="action" value="delete">

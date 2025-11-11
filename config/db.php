@@ -23,27 +23,8 @@ class Database {
         return $this->pdo;
     }
 }
-$protocol = 'http://';
-if (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) {
-    $protocol = 'https://';
-}
 
-// O host é o domínio (ex: localhost, ou projeto-givanildo-82e0a.wasmer.app)
-$host = $_SERVER['HTTP_HOST'];
-
-// 2. Verifica o ambiente de execução
-
-// Se o host contém 'wasmer.app', é o ambiente de produção
-if (strpos($host, 'wasmer.app') !== false) {
-    // No Wasmer, o projeto é a raiz do subdomínio. Ex: https://domain.wasmer.app
-    define('BASE_URL', $protocol . $host);
-
-} else {
-    // Ambiente local (geralmente localhost).
-    // Aqui você adiciona o nome do subdiretório usado no seu ambiente local (XAMPP/WAMP).
-    // Certifique-se de que NÃO HÁ uma barra final (trailing slash) aqui.
-    define('BASE_URL', $protocol . $host . '/Projeto_Givanildo');
-}
+define('BASE_URL', '/Projeto_Givanildo');
 
 
 ?>

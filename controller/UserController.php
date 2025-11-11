@@ -28,7 +28,6 @@ function redirectToError(string $url, string $errorCode): void {
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
     // 2. Coleta e sanitização de dados
-    // Se a ação não for passada (formulário de novo usuário não tem campo action), define como 'insert'.
     $action = filter_input(INPUT_POST, 'action', FILTER_SANITIZE_SPECIAL_CHARS) ?? 'insert';
     
     $nome = filter_input(INPUT_POST, 'name', FILTER_SANITIZE_SPECIAL_CHARS) ?? '';
@@ -42,7 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     switch ($action) {
         
         case 'update':
-            // ... LÓGICA DE ATUALIZAÇÃO (EDIÇÃO DE PERFIL) (Mantida do original)
+            // LÓGICA DE ATUALIZAÇÃO (EDIÇÃO DE PERFIL)
             
             // Coleta o ID do usuário (campo hidden)
             $id_usuario = filter_input(INPUT_POST, 'id_usuario', FILTER_VALIDATE_INT);
@@ -85,15 +84,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             try {
                 // Verifica se o novo login já pertence a OUTRO usuário (e não a ele mesmo)
                 $userByLogin = $userModel->buscarPorLogin($login);
-                if ($userByLogin && $userByLogin['id'] != $id_usuario) {
+                if ($userByLogin && $userByLogin['CLI_ID'] != $id_usuario) {
                     // ERRO: EMAIL_EXISTENTE
                     redirectToError($redirect_location, 'EMAIL_EXISTENTE');
                 }
                 
                 // Chamada ao método de atualização no Model
                 if ($userModel->atualizar($id_usuario, $nome, $login, $senha_para_atualizar)) {
+                    
+                    // =======================================================
+                    // [CORREÇÃO AQUI]: ATUALIZAÇÃO DA SESSÃO
+                    // 1. Buscar o usuário recém-atualizado do DB
+                    $usuario_atualizado = $userModel->buscarPorId($id_usuario);
+                    
+                    // 2. Sobrescrever a variável de sessão com os novos dados
+                    if ($usuario_atualizado) {
+                        // **IMPORTANTE**: Ajuste 'user' para a sua chave real de sessão se for diferente!
+                        $_SESSION['usuario'] = $usuario_atualizado; 
+                    }
+                    // =======================================================
+                    
                     // SUCESSO
-                    header('Location: ' . $redirect_location . '?status=SUCESSO'); 
+                    header('Location: ' . BASE_URL . '/view/user/index.php'); 
                     exit;
                 } else {
                     // ERRO: NENHUMA_ALTERACAO -> Query rodou, mas não afetou linhas (Model falhou)
@@ -105,12 +117,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 redirectToError($redirect_location, 'ERRO_INTERNO_DB');
             }
 
-            break; // Fim do 'update'
+            break; 
 
         case 'insert':
-            // =======================================================
-            // LÓGICA DE CADASTRO DE NOVO USUÁRIO (INSERT)
-            // =======================================================
+            // ... LÓGICA DE CADASTRO DE NOVO USUÁRIO (INSERT) (Mantida)
             $redirect_location = $redirect_new; // Em caso de erro, volta para o cadastro
 
             // 1. Validação de campos obrigatórios (Nome, Email, Senha, Confirmação)
@@ -155,13 +165,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 redirectToError($redirect_location, 'ERRO_INTERNO_DB');
             }
 
-            break; // Fim do 'insert'
+            break; 
             
         default:
-            // =======================================================
-            // AÇÃO INVÁLIDA (Qualquer coisa que não seja 'update' ou 'insert')
-            // =======================================================
-            // Agora, apenas a ação desconhecida cai aqui.
+            // AÇÃO INVÁLIDA
             redirectToError($redirect_new, 'ACAO_INVALIDA');
             break;
     } 
